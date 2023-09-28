@@ -39,7 +39,11 @@ router.post("/", (req, res) => {
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+
       if (req.body.tagIds.length) {
+        //map through the tagIds array and create a new object for each tag_id
+        //map functions like a forEach loop, but it returns a new array of the same length
+
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
             product_id: product.id,
